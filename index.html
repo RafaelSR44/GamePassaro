@@ -5,6 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+  <!-- 
+  O arquivo .js é legível e usado para desenvolvimento,
+  enquanto o .min.js é uma versão minificada,
+  sem espaços e comentários,
+  para melhorar o desempenho e reduzir o tamanho do arquivo.
+
+  Usar um link da web para importar o Phaser garante atualizações automáticas,
+  carregamento mais rápido via CDN e
+  menor uso de armazenamento.
+  
+   -->
   <title>Exercício do Pássaro</title>
   <style>
     body {
@@ -20,12 +31,12 @@
 <body>
 
   <script>
-
+    // configuração pra tela do jogo
     var config = {
       type: Phaser.AUTO,
       width: 800,
       height: 600,
-
+      //cenas que serão utilizadas para o bom andamento do jogo
       scene: {
         preload: preload,
         create: create,
@@ -34,29 +45,33 @@
     };
 
     var game = new Phaser.Game(config);
+    //variavel atribuida para o nosso protagonista, o passarinho fofo
     var passarinho;
 
     function preload() {
+      // carregamento dos assets do fundo da tela e do spritesheet do passarinho fofo
       this.load.image('bg', 'assets/bg_space.png');
       this.load.spritesheet('bird', 'assets/bird-purple.png', { frameWidth: 75, frameHeight: 75 })
     }
 
     function create() {
+      //posicionando os elementos na tela, e suas respectivos assets
       this.add.image(400, 300, 'bg').setScale(1.2);
       passarinho = this.add.sprite(100, 500, 'bird').setScale(1.3);
 
+      //configuração da animação atribuida para o voo do passaro, onde os numeros dos frames, framerate e a repetição continua
       this.anims.create({
         key: 'fly',
         frames: this.anims.generateFrameNumbers('bird', { start: 0, end: 7 }),
         frameRate: 10,
         repeat: -1
       })
-
+      //inicia a animação no nosso passarinho fofo
       passarinho.anims.play('fly', true);
 
 
     }
-
+    //variavel que analisa se se o "jogo" acabou de começar
     var start = true;
 
     function update() {
@@ -65,9 +80,9 @@
       if (passarinho.x === 100 && passarinho.y === 500) {
         passarinho.setFlip(false, false);
         passarinho.ida = true;
-        if(start===true){
-          start =  false;
-        } else{
+        if (start === true) { //  condicional para evitar rotações indesejadas no inicio do jogo
+          start = false;
+        } else {
           passarinho.rotation -= 90;
         }
       }
@@ -108,6 +123,7 @@
         passarinho.rotation += 90;
       }
 
+      // movimento de descida
       if (passarinho.y < 500 && passarinho.subida === false) {
         passarinho.y += 5;
       }
@@ -117,6 +133,7 @@
     }
   </script>
   <script>
+    //array com elogios
     const elogios = [
       "Criativa",
       "Inteligente",
@@ -129,7 +146,7 @@
       "Inspiradora",
       "Excepcional"
     ];
-
+    // laço for que imprime mensagens no console (onde apenas as verdades são ditas)
     for (let i = 0; i < 10; i++) {
       console.log(`A Kizzy é ${elogios[i]}`);
     }
