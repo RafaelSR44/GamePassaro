@@ -57,28 +57,35 @@
 
     }
 
+    var start = true;
+
     function update() {
-  
+
       //ponto inicial de saida onde x=100 e y=500
       if (passarinho.x === 100 && passarinho.y === 500) {
         passarinho.setFlip(false, false);
         passarinho.ida = true;
+        if(start===true){
+          start =  false;
+        } else{
+          passarinho.rotation -= 90;
+        }
       }
 
       //movimento ate o outro lado da tela
       if (passarinho.x < 700 && passarinho.ida === true) {
-        console.log("o que acontece?");
         passarinho.x += 5;
       }
+
       //ponto inicial de subida onde x=700 e y=500
       if (passarinho.x === 700 && passarinho.y === 500) {
         passarinho.setFlip(true, false);
         passarinho.subida = true;
+        passarinho.rotation += 90;
       }
 
       //movimento de subida
       if (passarinho.y > 100 && passarinho.subida === true) {
-        console.log("o que acontece?");
         passarinho.y -= 5;
       }
 
@@ -86,11 +93,11 @@
       if (passarinho.x === 700 && passarinho.y === 100) {
         passarinho.setFlip(true, false);
         passarinho.ida = false;
+        passarinho.rotation -= 90;
       }
 
       //movimento de vinda 
       if (passarinho.x > 100 && passarinho.ida === false) {
-        console.log("e o que acontece agora?");
         passarinho.x -= 5;
       }
 
@@ -98,10 +105,10 @@
       if (passarinho.x === 100 && passarinho.y === 100) {
         passarinho.setFlip(false, false);
         passarinho.subida = false;
+        passarinho.rotation += 90;
       }
 
       if (passarinho.y < 500 && passarinho.subida === false) {
-        console.log("o que acontece?");
         passarinho.y += 5;
       }
 
@@ -109,7 +116,24 @@
 
     }
   </script>
+  <script>
+    const elogios = [
+      "Criativa",
+      "Inteligente",
+      "Engraçada",
+      "Dedicada",
+      "Gentil",
+      "Brilhante",
+      "Carismática",
+      "Talentosa",
+      "Inspiradora",
+      "Excepcional"
+    ];
 
+    for (let i = 0; i < 10; i++) {
+      console.log(`A Kizzy é ${elogios[i]}`);
+    }
+  </script>
 </body>
 
 </html>
